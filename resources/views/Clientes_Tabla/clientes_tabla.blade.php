@@ -68,12 +68,18 @@
                         <td class="p-4">{{ $cliente->estado }}</td>
 
                         <td class="p-4">
-                            <a href="/clientes/editar/{{ $cliente->cliente_id }}"
-                                class="bg-yellow-500 text-white px-3 py-1 rounded">Editar</a>
-                                
-                            <a href="/clientes/eliminar/{{ $cliente->cliente_id }}"
+        @if(!Auth::guard('empleado')->user()->Vendedor() &&
+            !Auth::guard('empleado')->user()->Supervisor())
+        <a href="/clientes/editar/{{ $cliente->cliente_id }}" class="bg-yellow-500 text-white px-3 py-1 rounded">
+            Editar
+        </a>
+    @endif
 
-                                class="bg-red-500 text-white px-3 py-1 rounded">Eliminar</a>
+        @if(!Auth::guard('empleado')->user()->Vendedor())
+        <a href="/clientes/eliminar/{{ $cliente->cliente_id }}" class="bg-red-500 text-white px-3 py-1 rounded">
+            Eliminar
+        </a>
+    @endif
                         </td>
 
                     </tr>

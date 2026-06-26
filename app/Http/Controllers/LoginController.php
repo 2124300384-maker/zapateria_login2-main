@@ -20,13 +20,6 @@ class LoginController extends Controller
             $empleado = Auth::guard('empleado')->user();
 
             // Solo los administradores pueden entrar
-            if ($empleado->rol != 'Administrador') {
-                Auth::guard('empleado')->logout();
-
-                return back()->withErrors([
-                    'error' => 'No tienes permisos de administrador'
-                ]);
-            }
 
             $request->session()->regenerate();
 

@@ -35,12 +35,18 @@
                     <td class="p-4">{{ $color->color_id }}</td>
                     <td class="p-4">{{ $color->color }}</td>
                     <td class="p-4">
-                        <a href="/colores/editar/{{ $color->color_id }}" class="bg-yellow-500 text-white px-3 py-1 rounded">Editar</a>
-                            <form action="/colores/eliminar/{{ $color->color_id }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Eliminar</button>
-                            </form>
+                                @if(!Auth::guard('empleado')->user()->Vendedor() &&
+            !Auth::guard('empleado')->user()->Supervisor())
+        <a href="/colores/editar/{{ $color->color_id }}" class="bg-yellow-500 text-white px-3 py-1 rounded">
+            Editar
+        </a>
+    @endif
+
+        @if(!Auth::guard('empleado')->user()->Vendedor())
+        <a href="/colores/eliminar/{{ $color->color_id }}" class="bg-red-500 text-white px-3 py-1 rounded">
+            Eliminar
+        </a>
+    @endif
                     </td>
                 </tr>
             @endforeach

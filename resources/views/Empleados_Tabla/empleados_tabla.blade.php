@@ -73,8 +73,20 @@
     <td class="p-4">{{ $empleado->estado }}</td>
 
     <td class="p-4">
-        <a href="/empleados/editar/{{ $empleado->empleado_id }}" class="bg-yellow-500 text-white px-3 py-1 rounded">Editar</a>
-        <a href="/empleados/eliminar/{{ $empleado->empleado_id }}" class="bg-red-500 text-white px-3 py-1 rounded">Eliminar</a>
+
+        @if(!Auth::guard('empleado')->user()->Vendedor() &&
+            !Auth::guard('empleado')->user()->Supervisor())
+        <a href="/empleados/editar/{{ $empleado->empleado_id }}" class="bg-yellow-500 text-white px-3 py-1 rounded">
+            Editar
+        </a>
+    @endif
+
+        @if(!Auth::guard('empleado')->user()->Vendedor())
+        <a href="/empleados/eliminar/{{ $empleado->empleado_id }}" class="bg-red-500 text-white px-3 py-1 rounded">
+            Eliminar
+        </a>
+    @endif
+
     </td>
 
 </tr>

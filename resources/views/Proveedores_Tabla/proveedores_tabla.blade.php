@@ -57,16 +57,18 @@
                             </td>
 
                             <td class="p-4">
-                                <a href="/proveedores/editar/{{ $proveedor->proveedor_id }}"
-                                   class="bg-yellow-500 text-white px-3 py-1 rounded">
-                                    Editar
-                                </a>
+        @if(!Auth::guard('empleado')->user()->Vendedor() &&
+            !Auth::guard('empleado')->user()->Supervisor())
+        <a href="/proveedores/editar/{{ $proveedor->proveedor_id }}" class="bg-yellow-500 text-white px-3 py-1 rounded">
+            Editar
+        </a>
+    @endif
 
-                            <form action="/proveedores/eliminar/{{ $proveedor->proveedor_id }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Eliminar</button>
-                            </form>
+        @if(!Auth::guard('empleado')->user()->Vendedor())
+        <a href="/proveedores/eliminar/{{ $proveedor->proveedor_id }}" class="bg-red-500 text-white px-3 py-1 rounded">
+            Eliminar
+        </a>
+    @endif
                             </td>
 
                         </tr>

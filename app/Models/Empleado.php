@@ -32,4 +32,20 @@ class Empleado extends Authenticatable
     {
         return $this->hasMany(Venta::class, 'id_empleado');
     }
+
+    public function Administrador()
+    {
+    return $this->rol === 'Administrador';
+    }
+
+    public function Supervisor()
+    {
+        return $this->rol === 'Supervisor';
+    }
+
+    public function Vendedor()
+    {
+        return $this->rol === 'Vendedor';
+    }
+
 }
